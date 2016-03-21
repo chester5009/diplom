@@ -78,7 +78,7 @@ void Withney::setRate(){
                 rate+=i+1;
                 count+=1;
                 for(int j=0;j<count;j++){
-                    cout<<"info "<<rate<<" "<<count<<" "<<i-j<<endl;
+                    //cout<<"info "<<rate<<" "<<count<<" "<<i-j<<endl;
                     students->at(i-j).rate=rate/count;
                 }
 
@@ -87,7 +87,7 @@ void Withney::setRate(){
             }
             else {
                 for(int j=0;j<count;j++){
-                    cout<<"info "<<rate<<" "<<count<<" "<<i-j-1<<endl;
+                    //cout<<"info "<<rate<<" "<<count<<" "<<i-j-1<<endl;
                     students->at(i-j-1).rate=rate/count;
                 }
                 count=1;
@@ -102,6 +102,43 @@ void Withney::setRate(){
         }
 
     }
+}
+
+void Withney::loadDataFromFields(vector<QStringList> s){
+    for(int i=0;i<s.size();i++){
+        for (int j = 0; j < s.at(i).size(); ++j) {
+            Student newStudent{i,s.at(i).at(j).toFloat(),0};
+            //cout<<"UFO "<<s.at(i).at(j).toFloat()<<endl;
+            students->push_back(newStudent);
+        }
+    }
+}
+
+void Withney::results(){
+    float sum1=0,sum2=0;
+    int n1=0,n2=0,nx=0;
+    float Tx=0;
+    for(int i=0;i<students->size();i++){
+        if(students->at(i).group==0) {
+            n1++;
+            sum1+=students->at(i).rate;
+        }
+        else {
+            n2++;
+            sum2+=students->at(i).rate;
+        }
+    }
+    if(sum1<sum2){
+        Tx=sum2;
+        nx=n2;
+    }
+    else {
+        Tx=sum1;
+        nx=n1;
+    }
+    cout<<"Premennye "<<n1<<" "<<n2<<" "<<nx<<" "<<Tx<<" "<<sum1<<" "<<sum2<<endl;
+    float res=calculateWithney(n1,n2,nx,Tx);
+    cout<<"Mann !! "<<res<<endl;
 }
 
 float Withney::calculateWithney(int n1,int n2,int nx,float Tx){

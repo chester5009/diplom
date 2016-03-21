@@ -2,7 +2,7 @@
 #define WITHNEY_H
 #include <iostream>
 #include <vector>
-
+#include <QMainWindow>
 using namespace std;
 
 
@@ -26,6 +26,8 @@ public:
     void sortStudents();
     void setRate();
     float calculateWithney(int,int,int,float);
+    void loadDataFromFields(vector<QStringList>);
+    void results();
 
 };
 
