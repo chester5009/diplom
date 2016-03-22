@@ -12,9 +12,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->textEdit->setEnabled(false);
     ui->textEdit_2->setEnabled(false);
     ui->calculateButton->setEnabled(false);
-
-
-
+    ui->stackedWidget->setCurrentIndex(1);
+    ui->tableWidget->setRowCount(5);
+    ui->tableWidget->setColumnCount(7);
+    //ui->tableWidget->it
 
     mann->showStudents();
     mann->sortStudents();
