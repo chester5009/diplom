@@ -115,6 +115,7 @@ void Withney::loadDataFromFields(vector<QStringList> s){
 }
 
 void Withney::results(){
+    setlocale(LC_ALL, "rus");
     float sum1=0,sum2=0;
     int n1=0,n2=0,nx=0;
     float Tx=0;
@@ -138,8 +139,68 @@ void Withney::results(){
     }
     cout<<"Premennye "<<n1<<" "<<n2<<" "<<nx<<" "<<Tx<<" "<<sum1<<" "<<sum2<<endl;
     float res=calculateWithney(n1,n2,nx,Tx);
-    cout<<"Mann !! "<<res<<endl;
+
+    float Uemp001=this->table001->at(n1-3).at(n2-2);
+    float Uemp005=this->table005->at(n1-3).at(n2-2);
+    cout<<"UEmp001= "<<Uemp001<<" UEmp005= "<<Uemp005<<endl;
+
+    string itog1="Group 1 Group 2 DOES NOT exceed the level of nonverbal intelligence";
+    string itog2="Group 1 group 2 exceeds the level of non-verbal intelligence";
+    //string itog3="Group 1 EQUAL group 2";
+    if(res>=Uemp005)
+    cout<<"Mann !! "<<res<<" "<<itog1<<endl;
+    else if(res<Uemp005){
+       cout<<"Mann !! "<<res<<" "<<itog2<<endl;
+    }
+    else{
+      // cout<<"Mann !! "<<res<<" "<<itog3<<endl;
+    }
 }
+
+void Withney::setTable(vector<QStringList> data, int index){
+    vector<vector<float> > *newTable=new  vector< vector<float> > ;
+    cout<<"Razmer STROKI "<< data.size()<< " "<<data.at(0).size()<<endl;
+    for (int i = 0; i < data.size(); ++i) {
+        vector<float> oneRow;
+        for (int j = 0; j < data.at(i).size(); ++j) {
+            if(data.at(i).at(j)=="-")oneRow.push_back(-1);
+            else oneRow.push_back(data.at(i).at(j).toFloat());
+        }
+        newTable->push_back(oneRow);
+    }
+    cout<<"Razmer TABLISY "<< newTable->size()<< " "<<newTable->at(0).size()<<endl;
+    cout<<newTable->at(0).at(0)<<endl;
+    switch (index) {
+    case 0:
+        this->table001=newTable;
+        break;
+    case 1:
+        this->table005=newTable;
+        break;
+    default:
+        break;
+    }
+    //this->table005=newTable;
+}
+
+void Withney::showTable(vector<vector<float> > *table){
+        cout<<" HELLO"<<endl;
+        cout<<table->at(0).at(0)<<endl;
+        /*for (int i = 0; i < table->size(); ++i) {
+            for (int j = 0; j < table->at(i).size(); ++j) {
+                cout<<table->at(i).at(j)<<" ";
+            }
+            //cout<<endl;
+        }*/
+
+}
+
+void Withney::showTableCell(vector<vector<float> > *table, int row, int col){
+       cout<<table->at(row-3).at(col-2)<<" ";
+       cout<<endl;
+}
+
+
 
 float Withney::calculateWithney(int n1,int n2,int nx,float Tx){
 

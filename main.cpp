@@ -3,6 +3,7 @@
 #include <QApplication>
 #include <vector>
 #include <stdlib.h>
+#include <locale.h>
 using namespace std;
 
 int main(int argc, char *argv[])

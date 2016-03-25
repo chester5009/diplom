@@ -17,17 +17,26 @@ class Withney
 {
 private:
     vector<Student> *students=new vector<Student>;
+
+
 public:
     Withney();
     void createStudents(int);//функция создания студентов
-    void addStudent(Student);
-    void clearStudents();
-    void showStudents();
-    void sortStudents();
-    void setRate();
-    float calculateWithney(int,int,int,float);
-    void loadDataFromFields(vector<QStringList>);
-    void results();
+    void addStudent(Student);//добавление студента
+    void clearStudents();//очистка студентов
+    void showStudents();//показ студентов
+    void sortStudents();//сортировка студентов по баллам
+    void setRate();//функция утсановки рейтинга
+    float calculateWithney(int,int,int,float);//подсчет коэффициента мана уитни
+    void loadDataFromFields(vector<QStringList>);//загрузка данных с полей ввода
+    void results();//подсчет и вывод окончательных результатов
+
+    void setTable(vector<QStringList> data, int index); // установка таблицы критических значений
+    void showTable(vector< vector<float> > *table); // показать таблицу критических значений
+    void showTableCell(vector< vector<float> > *table,int,int); // показать ячейку таблицы критических значений
+
+    vector< vector<float> > *table001;
+    vector< vector<float> > *table005;
 
 };
 

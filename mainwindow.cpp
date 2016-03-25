@@ -12,7 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->textEdit->setEnabled(false);
     ui->textEdit_2->setEnabled(false);
     ui->calculateButton->setEnabled(false);
-    ui->stackedWidget->setCurrentIndex(1);
+    ui->stackedWidget->setCurrentIndex(0);
     ui->tableWidget->setRowCount(5);
     ui->tableWidget->setColumnCount(7);
     //ui->tableWidget->it
@@ -22,6 +22,15 @@ MainWindow::MainWindow(QWidget *parent) :
     mann->showStudents();
     mann->setRate();
     mann->showStudents();
+
+    //Загрузка таблиц 001 005 критических значений.
+    vector<QStringList> list;
+    list=getFromCsv("table001.csv");
+    mann->setTable(list,0);
+    list=getFromCsv("table005.csv");
+    mann->setTable(list,1);
+    //mann->showTable(mann->table005);
+    //mann->showTableCell(mann->table005,20,20);
 
 }
 
@@ -72,4 +81,166 @@ void MainWindow::on_calculateButton_clicked()
     mann->setRate();
     mann->showStudents();
     mann->results();
+
+}
+
+void MainWindow::on_action_csv_triggered()
+{
+    ui->stackedWidget->setCurrentIndex(1);
+    QFileDialog openFile;
+    QString path=openFile.getOpenFileName();
+    if(path!=NULL){
+        vector<QStringList> list=getFromCsv(path);
+        fillTable(ui->tableWidget,getFromCsv(path));
+
+    }
+
+
+
+
+}
+
+vector<QStringList> MainWindow::getFromCsv(QString path){
+    vector<QStringList> fileDate;
+
+    QFile file;
+    file.setFileName(path);
+    file.open(QIODevice::ReadOnly);
+    cout<<"FilePath - "<<path.toUtf8().constData()<<endl;
+    while(!file.atEnd()){
+        QString str= file.readLine();
+        str.replace(',','.');
+        QStringList oneString=str.split(';');
+        cout<<str.toUtf8().constData()<<endl;
+        fileDate.push_back(oneString);
+    }
+    file.close();
+
+    return fileDate;
+}
+void MainWindow::fillTable(QTableWidget *table, vector<QStringList> list){
+    table->setColumnCount(list.at(0).size());
+    table->setRowCount(list.size());
+    for(int i=0;i<list.size();++i){
+        for (int j = 0; j < list.at(i).size(); ++j) {
+            QTableWidgetItem *item=new QTableWidgetItem;
+            item->setText(list.at(i).at(j));
+            table->setItem(i,j,item);
+        }
+    }
+}
+
+void MainWindow::on_pushButton_clicked(){
+cout<<"Hell"<<endl;
+}
+
+void MainWindow::on_calculateButton2_clicked()
+{
+
+    //cout<<"Orientation "<<getTableOrientation()<<endl;
+    //cout<<"Hello"<<endl;
+    if(stroka1!=NULL && stroka2!=NULL){
+        vector<QStringList> students=getInfoFromFields(stroka1,stroka2);
+        mann->loadDataFromFields(students);
+        mann->sortStudents();
+        mann->setRate();
+        //mann->showStudents();
+        mann->results();
+    }
+}
+//взять данные из выделенной таблицы ,определить ориентацию таблицы,
+int MainWindow::getTableOrientation(){
+    QModelIndexList selectedIndices=ui->tableWidget->selectionModel()->selection().indexes();
+    cout<<"Selected :"<<endl;
+    QString str1,str2;
+    for (int i = 0; i < selectedIndices.count(); ++i) {
+        QModelIndex index=selectedIndices.at(i);
+        cout<<index.row()<<" "<<index.column()<<endl;
+    }
+
+    if(selectedIndices.size()>0){
+        if(selectedIndices.at(selectedIndices.count()-1).column()-selectedIndices.at(0).column()==1){
+            for (int i = 0; i < selectedIndices.count(); ++i) {
+                int iRow=selectedIndices.at(i).row();
+                int iCol=selectedIndices.at(i).column();
+                if(selectedIndices.at(i).column()==selectedIndices.at(0).column()){
+                    str1+=ui->tableWidget->item(iRow,iCol)->text()+",";
+                    //if(i==selectedIndices.count()-1)str1.remove(i==selectedIndices.count()-1,1);
+                }
+                else{
+                    str2+=ui->tableWidget->item(iRow,iCol)->text()+",";
+                    //if(i==selectedIndices.count()-1)str2.remove(i==selectedIndices.count()-1,1);
+                }
+
+
+            }
+            str1.remove(selectedIndices.count()-1,1);
+            str2.remove(selectedIndices.count()-1,1);
+            cout<<"Q Len "<<str1.toUtf8().constData()<<" "<<str2.toUtf8().constData()<<endl;
+            getInfoFromFields(str1,str2);
+            vector<QStringList> students=getInfoFromFields(str1,str1);
+            mann->loadDataFromFields(students);
+            mann->sortStudents();
+            mann->setRate();
+            //mann->showStudents();
+            mann->results();
+
+            return 0;//Вертикальная ориентация таблицы
+        }
+        else if(selectedIndices.at(selectedIndices.count()-1).row()-selectedIndices.at(0).row()==1){
+            for (int i = 0; i < selectedIndices.count(); ++i) {
+                int iRow=selectedIndices.at(i).row();
+                int iCol=selectedIndices.at(i).column();
+                if(selectedIndices.at(i).row()==selectedIndices.at(0).row()){
+                    str1+=ui->tableWidget->item(iRow,iCol)->text()+",";
+                    //if(i==selectedIndices.count()-1)str1.remove(i==selectedIndices.count()-1,1);
+                }
+                else{
+                    str2+=ui->tableWidget->item(iRow,iCol)->text()+",";
+                    //if(i==selectedIndices.count()-1)str2.remove(i==selectedIndices.count()-1,1);
+                }
+
+
+            }
+            str1.remove(str1.count(),1);
+            str2.remove(str2.count(),1);
+            cout<<"Q Len "<<str1.toUtf8().constData()<<" "<<str2.toUtf8().constData()<<endl;
+            getInfoFromFields(str1,str2);
+            vector<QStringList> students=getInfoFromFields(str1,str2);
+            mann->loadDataFromFields(students);
+            mann->sortStudents();
+            mann->setRate();
+            //mann->showStudents();
+            mann->results();
+            return 1;//Горизонтальная ориентация таблицы
+        }
+    }
+    return -1;
+
+}
+
+void MainWindow::on_addButton_clicked()
+{
+    if(ui->comboBox->currentIndex()==0)
+    stroka1=takeString();
+    else {
+        stroka2=takeString();
+    }
+
+
+}
+
+QString MainWindow::takeString(){
+    QString str=NULL;
+    QModelIndexList selectedIndices=ui->tableWidget->selectionModel()->selection().indexes();
+    cout<<"Selected :"<<endl;
+    for(int i=0;i<selectedIndices.count();++i){
+        int iRow=selectedIndices.at(i).row();
+        int iCol=selectedIndices.at(i).column();
+        str.push_back(ui->tableWidget->item(iRow,iCol)->text()+",");
+
+    }
+    str.remove(str.length()-1,1);
+    cout<<str.toUtf8().constData()<<endl;
+    return str;
 }
