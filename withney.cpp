@@ -144,8 +144,8 @@ void Withney::results(){
     float Uemp005=this->table005->at(n1-3).at(n2-2);
     cout<<"UEmp001= "<<Uemp001<<" UEmp005= "<<Uemp005<<endl;
 
-    string itog1="Group 1 Group 2 DOES NOT exceed the level of nonverbal intelligence";
-    string itog2="Group 1 group 2 exceeds the level of non-verbal intelligence";
+    string itog1="Group 2  DOES NOT exceed Group 1 the level of nonverbal intelligence";
+    string itog2="Group 2  exceeds Group 1 the level of non-verbal intelligence";
     //string itog3="Group 1 EQUAL group 2";
     if(res>=Uemp005)
     cout<<"Mann !! "<<res<<" "<<itog1<<endl;

@@ -63,8 +63,8 @@ vector<QStringList> MainWindow::getInfoFromFields(QString str1, QString str2){
      vector<QStringList> students;
      vector<float> studs;
 
-     QStringList group1=str1.split(",");
-     QStringList group2=str2.split(",");
+     QStringList group1=str1.split("|");
+     QStringList group2=str2.split("|");
      students.push_back(group1);
      students.push_back(group2);
      //group1.at(0).toUtf8().
@@ -237,10 +237,11 @@ QString MainWindow::takeString(){
     for(int i=0;i<selectedIndices.count();++i){
         int iRow=selectedIndices.at(i).row();
         int iCol=selectedIndices.at(i).column();
-        str.push_back(ui->tableWidget->item(iRow,iCol)->text()+",");
+        str.push_back(ui->tableWidget->item(iRow,iCol)->text()+"|");
 
     }
     str.remove(str.length()-1,1);
+    str.replace(',','.');
     cout<<str.toUtf8().constData()<<endl;
     return str;
 }
