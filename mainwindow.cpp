@@ -39,11 +39,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_tableView_clicked(const QModelIndex &index)
-{
-    QCoreApplication::quit();
 
-}
 
 void MainWindow::on_action_exit_triggered()
 {
@@ -130,9 +126,9 @@ void MainWindow::fillTable(QTableWidget *table, vector<QStringList> list){
     }
 }
 
-void MainWindow::on_pushButton_clicked(){
+/*void MainWindow::on_pushButton_clicked(){
 cout<<"Hell"<<endl;
-}
+}*/
 
 void MainWindow::on_calculateButton2_clicked()
 {
@@ -146,6 +142,8 @@ void MainWindow::on_calculateButton2_clicked()
         mann->setRate();
         //mann->showStudents();
         mann->results();
+        stroka1="";
+        stroka2="";
     }
 }
 //взять данные из выделенной таблицы ,определить ориентацию таблицы,
@@ -221,9 +219,13 @@ int MainWindow::getTableOrientation(){
 
 void MainWindow::on_addButton_clicked()
 {
-    if(ui->comboBox->currentIndex()==0)
-    stroka1=takeString();
+    if(ui->comboBox->currentIndex()==0){
+      stroka2="";
+      stroka1=takeString();
+    }
+
     else {
+        stroka2="";
         stroka2=takeString();
     }
 
@@ -245,3 +247,5 @@ QString MainWindow::takeString(){
     cout<<str.toUtf8().constData()<<endl;
     return str;
 }
+
+

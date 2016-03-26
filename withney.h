@@ -3,6 +3,9 @@
 #include <iostream>
 #include <vector>
 #include <QMainWindow>
+#include <QPdfWriter>
+#include <QPrinter>
+#include <QPainter>
 using namespace std;
 
 
@@ -35,6 +38,7 @@ public:
     void showTable(vector< vector<float> > *table); // показать таблицу критических значений
     void showTableCell(vector< vector<float> > *table,int,int); // показать ячейку таблицы критических значений
 
+    void resetVariables();
     vector< vector<float> > *table001;
     vector< vector<float> > *table005;
 

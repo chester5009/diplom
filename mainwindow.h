@@ -29,7 +29,7 @@ public:
     QString takeString();
 
 private slots:
-    void on_tableView_clicked(const QModelIndex &index);
+
 
     void on_action_exit_triggered();
 
@@ -41,11 +41,13 @@ private slots:
 
 
 
-    void on_pushButton_clicked();
+
 
     void on_calculateButton2_clicked();
 
     void on_addButton_clicked();
+
+
 
 private:
     Ui::MainWindow *ui;

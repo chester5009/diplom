@@ -146,15 +146,39 @@ void Withney::results(){
 
     string itog1="Group 2  DOES NOT exceed Group 1 the level of nonverbal intelligence";
     string itog2="Group 2  exceeds Group 1 the level of non-verbal intelligence";
+    QString results="Mann = "+QString::number(res)+" ";
     //string itog3="Group 1 EQUAL group 2";
-    if(res>=Uemp005)
-    cout<<"Mann !! "<<res<<" "<<itog1<<endl;
+    if(res>=Uemp005){
+       cout<<"Mann !! "<<res<<" "<<itog1<<endl;
+       results+=QString::fromStdString(itog1);
+    }
     else if(res<Uemp005){
        cout<<"Mann !! "<<res<<" "<<itog2<<endl;
+       results+=QString::fromStdString(itog2);
     }
     else{
       // cout<<"Mann !! "<<res<<" "<<itog3<<endl;
     }
+
+    QPrinter printer;
+    printer.setOutputFileName("output.pdf");
+    printer.setOutputFormat(QPrinter::PdfFormat);
+
+    QPainter painter(&printer);
+    QPen pen;
+    pen.setWidth(14);
+    pen.setColor(Qt::blue);
+    QFont font;
+    font.setPixelSize(18);
+
+    painter.setFont(font);
+    //pen.setBrush(Qt::SolidLine);
+    painter.setPen(pen);
+
+    painter.drawText(30,30,results);
+
+
+    resetVariables();
 }
 
 void Withney::setTable(vector<QStringList> data, int index){
@@ -200,7 +224,10 @@ void Withney::showTableCell(vector<vector<float> > *table, int row, int col){
        cout<<endl;
 }
 
+void Withney::resetVariables(){
+    this->students=new vector<Student>;
 
+}
 
 float Withney::calculateWithney(int n1,int n2,int nx,float Tx){
 
