@@ -18,6 +18,7 @@ SOURCES += main.cpp\
     withney.cpp
 
 HEADERS  += mainwindow.h \
-    withney.h
+    withney.h \
+    tables.h
 
 FORMS    += mainwindow.ui

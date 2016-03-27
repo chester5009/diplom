@@ -24,11 +24,13 @@ MainWindow::MainWindow(QWidget *parent) :
     mann->showStudents();
 
     //Загрузка таблиц 001 005 критических значений.
-    vector<QStringList> list;
+
+    /*vector<QStringList> list;
     list=getFromCsv("table001.csv");
     mann->setTable(list,0);
     list=getFromCsv("table005.csv");
-    mann->setTable(list,1);
+    mann->setTable(list,1);*/
+
     //mann->showTable(mann->table005);
     //mann->showTableCell(mann->table005,20,20);
 

@@ -6,6 +6,7 @@
 #include <QPdfWriter>
 #include <QPrinter>
 #include <QPainter>
+#include <QFileDialog>
 using namespace std;
 
 
