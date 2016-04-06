@@ -165,7 +165,7 @@ void Withney::results(){
     QString path=openFile.getExistingDirectory();
     QPrinter printer;
 
-    printer.setOutputFileName(path+"output.pdf");
+    printer.setOutputFileName("output.pdf");
     printer.setOutputFormat(QPrinter::PdfFormat);
 
     QPainter painter(&printer);
