@@ -160,9 +160,9 @@ void Withney::results(){
     else{
       // cout<<"Mann !! "<<res<<" "<<itog3<<endl;
     }
-    QFileDialog openFile;
+    //QFileDialog openFile;
 
-    QString path=openFile.getExistingDirectory();
+    //QString path=openFile.getExistingDirectory();
     QPrinter printer;
 
     printer.setOutputFileName("output.pdf");

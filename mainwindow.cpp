@@ -7,8 +7,14 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    method=ui->comboSelectMethod->currentIndex();
+
     this->setMaximumSize(648,613);
     this->setMinimumSize(648,613);
+
+    ui->actions->setEnabled(false);
+
     ui->textEdit->setEnabled(false);
     ui->textEdit_2->setEnabled(false);
     ui->calculateButton->setEnabled(false);
@@ -53,8 +59,10 @@ void MainWindow::on_action_input_triggered()
     ui->textEdit->setEnabled(true);
     ui->textEdit_2->setEnabled(true);
     ui->calculateButton->setEnabled(true);
+    ui->stackedWidget->setCurrentIndex(1);
 
-
+    ui->table_input->setRowCount(1);
+    ui->table_input->setColumnCount(2);
 }
 
 vector<QStringList> MainWindow::getInfoFromFields(QString str1, QString str2){
@@ -251,3 +259,40 @@ QString MainWindow::takeString(){
 }
 
 
+
+void MainWindow::on_buttonBox_accepted()
+{
+    method=ui->comboSelectMethod->currentIndex();
+    cout<<method<<endl;
+
+    QMessageBox msg;
+    msg.setText("Нажмите вкладку 'Операции' и выберите метод ввода");
+    msg.exec();
+   ui->actions->setEnabled(true);
+   //ui->stackedWidget->setCurrentIndex(1);
+}
+
+void MainWindow::on_action_help_triggered()
+{
+    QMessageBox helpMessage;
+    helpMessage.setText("текст с руководством программы");
+    helpMessage.setStandardButtons(QMessageBox::Ok);
+    helpMessage.exec();
+}
+
+
+
+void MainWindow::on_table_input_currentItemChanged(QTableWidgetItem *current, QTableWidgetItem *previous)
+{
+
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+   ui->table_input->insertRow(ui->table_input->rowCount());
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+
+}

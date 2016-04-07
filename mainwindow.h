@@ -9,6 +9,7 @@
 #include <QTextStream>
 #include <QTableWidget>
 #include "withney.h"
+#include <QMessageBox>
 using namespace std;
 namespace Ui {
 class MainWindow;
@@ -49,11 +50,24 @@ private slots:
 
 
 
+    void on_buttonBox_accepted();
+
+    void on_action_help_triggered();
+
+    //void on_table_input_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
+
+    void on_table_input_currentItemChanged(QTableWidgetItem *current, QTableWidgetItem *previous);
+
+    void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
+
 private:
     Ui::MainWindow *ui;
     Withney *mann=new Withney;
     QString stroka1=NULL;
     QString stroka2=NULL;
+    int method; //0-mann 1-kolmogorov
 };
 
 #endif // MAINWINDOW_H
