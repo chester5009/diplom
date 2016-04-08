@@ -2,6 +2,11 @@
 #include <cstdlib>
 #include <ctime>
 #include <tables.h>
+vector<Student> *Withney::getStudents() const
+{
+    return students;
+}
+
 Withney::Withney()
 {
 
@@ -106,11 +111,13 @@ void Withney::setRate(){
 }
 
 void Withney::loadDataFromFields(vector<QStringList> s){
+
     for(int i=0;i<s.size();i++){
         for (int j = 0; j < s.at(i).size(); ++j) {
             Student newStudent{i,s.at(i).at(j).toFloat(),0};
             //cout<<"UFO "<<s.at(i).at(j).toFloat()<<endl;
             students->push_back(newStudent);
+            //<<"PUSHED STUD"<<endl;
         }
     }
 }
@@ -229,7 +236,7 @@ void Withney::showTableCell(vector<vector<float> > *table, int row, int col){
 }
 
 void Withney::resetVariables(){
-    this->students=new vector<Student>;
+    this->students->clear();
 
 }
 

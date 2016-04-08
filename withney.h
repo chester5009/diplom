@@ -39,10 +39,13 @@ public:
     void showTable(vector< vector<float> > *table); // показать таблицу критических значений
     void showTableCell(vector< vector<float> > *table,int,int); // показать ячейку таблицы критических значений
 
+
+
     void resetVariables();
     vector< vector<float> > *table001;
     vector< vector<float> > *table005;
 
+    vector<Student> *getStudents() const;
 };
 
 #endif // WITHNEY_H

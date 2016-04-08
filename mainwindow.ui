@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="page_3">
      <widget class="QComboBox" name="comboSelectMethod">
@@ -102,7 +102,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QComboBox" name="comboBox_2">
+     <widget class="QComboBox" name="comboBox_list">
       <property name="geometry">
        <rect>
         <x>200</x>
@@ -127,8 +127,8 @@
      <widget class="QTableWidget" name="table_input">
       <property name="geometry">
        <rect>
-        <x>110</x>
-        <y>60</y>
+        <x>40</x>
+        <y>20</y>
         <width>391</width>
         <height>391</height>
        </rect>
@@ -137,8 +137,8 @@
      <widget class="QPushButton" name="pushButton">
       <property name="geometry">
        <rect>
-        <x>114</x>
-        <y>480</y>
+        <x>30</x>
+        <y>420</y>
         <width>111</width>
         <height>23</height>
        </rect>
@@ -150,14 +150,85 @@
      <widget class="QPushButton" name="pushButton_2">
       <property name="geometry">
        <rect>
-        <x>340</x>
-        <y>480</y>
+        <x>30</x>
+        <y>450</y>
         <width>151</width>
         <height>23</height>
        </rect>
       </property>
       <property name="text">
        <string>Удалить выделенные</string>
+      </property>
+     </widget>
+     <widget class="QDialogButtonBox" name="buttonBox_2">
+      <property name="geometry">
+       <rect>
+        <x>430</x>
+        <y>510</y>
+        <width>156</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="standardButtons">
+       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="buttonChangeName">
+      <property name="geometry">
+       <rect>
+        <x>240</x>
+        <y>430</y>
+        <width>191</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Изменить названия групп</string>
+      </property>
+     </widget>
+     <widget class="QTextEdit" name="textEdit_3">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>470</y>
+        <width>131</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QTextEdit" name="textEdit_4">
+      <property name="geometry">
+       <rect>
+        <x>380</x>
+        <y>470</y>
+        <width>131</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="button_calc">
+      <property name="geometry">
+       <rect>
+        <x>480</x>
+        <y>230</y>
+        <width>71</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>РАССЧЁТ</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="page_5">
+     <widget class="QTableWidget" name="tableWidget_2">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>90</y>
+        <width>181</width>
+        <height>421</height>
+       </rect>
       </property>
      </widget>
     </widget>

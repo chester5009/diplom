@@ -10,6 +10,7 @@
 #include <QTableWidget>
 #include "withney.h"
 #include <QMessageBox>
+#include <QDebug>
 using namespace std;
 namespace Ui {
 class MainWindow;
@@ -27,7 +28,9 @@ public:
 
     void fillTable(QTableWidget *table,vector<QStringList> list );
     int getTableOrientation(); //получить ориентацию таблицы 0 - вертикальная  1 - горизонтальная
-    QString takeString();
+    QString takeString(QTableWidget *table);
+
+    vector<QStringList> getDataFromTable(QTableWidget *table, int groupCount);
 
 private slots:
 
@@ -62,12 +65,29 @@ private slots:
 
     void on_pushButton_2_clicked();
 
+    void on_buttonBox_2_accepted();
+
+    void on_buttonBox_2_rejected();
+
+    void on_buttonChangeName_clicked();
+
+    void on_textEdit_3_textChanged();
+
+    void on_textEdit_4_textChanged();
+
+    void on_button_calc_clicked();
+
 private:
     Ui::MainWindow *ui;
     Withney *mann=new Withney;
     QString stroka1=NULL;
     QString stroka2=NULL;
     int method; //0-mann 1-kolmogorov
+    int howInput;//0-общий список ,1- по 2 группы
+    void deleteIndeces(QModelIndexList *m);
+    void sortIndeces(QModelIndexList *m);
+    QString nameGroup1="Контрольная";
+    QString nameGroup2="Экспериментальная";
 };
 
 #endif // MAINWINDOW_H

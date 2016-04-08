@@ -9,11 +9,15 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     method=ui->comboSelectMethod->currentIndex();
+    howInput=ui->comboBox_list->currentIndex();
 
     this->setMaximumSize(648,613);
     this->setMinimumSize(648,613);
 
     ui->actions->setEnabled(false);
+
+    ui->textEdit_3->setVisible(false);
+    ui->textEdit_4->setVisible(false);
 
     ui->textEdit->setEnabled(false);
     ui->textEdit_2->setEnabled(false);
@@ -61,8 +65,29 @@ void MainWindow::on_action_input_triggered()
     ui->calculateButton->setEnabled(true);
     ui->stackedWidget->setCurrentIndex(1);
 
-    ui->table_input->setRowCount(1);
-    ui->table_input->setColumnCount(2);
+    if(howInput==1){
+        ui->table_input->setRowCount(1);
+        ui->table_input->setColumnCount(2);
+        QTableWidgetItem *header=new QTableWidgetItem();
+        header->setText(nameGroup1);
+        QTableWidgetItem *header2=new QTableWidgetItem();
+        header2->setText(nameGroup2);
+        ui->table_input->setHorizontalHeaderItem(0,header);
+        ui->table_input->setHorizontalHeaderItem(1,header2);
+    }
+    else if (howInput ==0) {
+        ui->table_input->setRowCount(1);
+        ui->table_input->setColumnCount(1);
+        QTableWidgetItem *header=new QTableWidgetItem();
+        header->setText("Список оценок");
+
+        ui->table_input->setHorizontalHeaderItem(0,header);
+
+
+    }
+    ui->table_input->resizeColumnsToContents();
+
+
 }
 
 vector<QStringList> MainWindow::getInfoFromFields(QString str1, QString str2){
@@ -98,6 +123,7 @@ void MainWindow::on_action_csv_triggered()
     if(path!=NULL){
         vector<QStringList> list=getFromCsv(path);
         fillTable(ui->tableWidget,getFromCsv(path));
+        ui->stackedWidget->setCurrentIndex(4);
 
     }
 
@@ -231,20 +257,20 @@ void MainWindow::on_addButton_clicked()
 {
     if(ui->comboBox->currentIndex()==0){
       stroka2="";
-      stroka1=takeString();
+      stroka1=takeString(ui->tableWidget);
     }
 
     else {
         stroka2="";
-        stroka2=takeString();
+        stroka2=takeString(ui->tableWidget);
     }
 
 
 }
 
-QString MainWindow::takeString(){
+QString MainWindow::takeString(QTableWidget *table){
     QString str=NULL;
-    QModelIndexList selectedIndices=ui->tableWidget->selectionModel()->selection().indexes();
+    QModelIndexList selectedIndices=table->selectionModel()->selection().indexes();
     cout<<"Selected :"<<endl;
     for(int i=0;i<selectedIndices.count();++i){
         int iRow=selectedIndices.at(i).row();
@@ -258,17 +284,46 @@ QString MainWindow::takeString(){
     return str;
 }
 
+vector<QStringList> MainWindow::getDataFromTable(QTableWidget *table, int groupCount)
+{
+    vector<QStringList> newData;
+    QStringList list;
+    QString stroka;
+
+    for (int i = 0; i < groupCount+1; ++i) {
+        list.clear();
+        stroka.clear();
+        for (int j = 0; j < table->rowCount(); ++j) {
+            if(table->item(j,i)!=0){
+               stroka.push_back(table->item(j,i)->text()+"|");
+               cout<<"STROKA!"<<endl;
+            }
+
+
+        }
+        list=stroka.split("|");
+        newData.push_back(list);
+        cout<<"Pushed!!"<<endl;
+        cout<<stroka.toUtf8().constData()<<endl;
+
+    }
+    return newData;
+}
+
 
 
 void MainWindow::on_buttonBox_accepted()
 {
     method=ui->comboSelectMethod->currentIndex();
     cout<<method<<endl;
-
+    howInput=ui->comboBox_list->currentIndex();
     QMessageBox msg;
     msg.setText("Нажмите вкладку 'Операции' и выберите метод ввода");
     msg.exec();
    ui->actions->setEnabled(true);
+
+   ui->table_input->setColumnCount(howInput+1);
+   ui->table_input->clearContents();
    //ui->stackedWidget->setCurrentIndex(1);
 }
 
@@ -294,5 +349,102 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_pushButton_2_clicked()
 {
+    QModelIndexList selection=ui->table_input->selectionModel()->selectedIndexes();
+    if(ui->table_input->columnCount()>1) deleteIndeces(&selection);
+    sortIndeces(&selection);
+    for (int i = 0; i < selection.count(); ++i) {
+        ui->table_input->removeRow(selection.at(i).row()-i);
 
+    }
+}
+
+void MainWindow::deleteIndeces(QModelIndexList *m)
+{
+    for (int i = 1; i < m->count(); ++i) {
+
+        if(m->at(i).column()>0 && i>0){
+            //QTableWidgetItem *prevItem=ui->table_input->item(m->at(i).row()-i,0);
+            if(m->at(i).column()>0 && m->at(i-1).column()==0)
+            m->removeAt(i);
+        }
+
+
+    }
+}
+
+void MainWindow::sortIndeces(QModelIndexList *m)
+{
+    for (int i = 0; i < m->count()-1; ++i) {
+        for (int j = 0; j < m->count()-i-1; ++j) {
+            if(m->at(j).row()>m->at(j+1).row()){
+                m->swap(j,j+1);
+            }
+        }
+    }
+}
+
+void MainWindow::on_buttonBox_2_accepted()
+{
+    ui->stackedWidget->setCurrentIndex(2);
+}
+
+void MainWindow::on_buttonBox_2_rejected()
+{
+    ui->stackedWidget->setCurrentIndex(0);
+}
+
+void MainWindow::on_buttonChangeName_clicked()
+{
+    if(howInput==1){
+        ui->textEdit_3->setVisible(true);
+        ui->textEdit_4->setVisible(true);
+        ui->textEdit_3->setText(nameGroup1);
+        ui->textEdit_4->setText(nameGroup2);
+    }
+    else{
+        ui->textEdit_3->setVisible(true);
+
+        ui->textEdit_3->setText(nameGroup1);
+
+    }
+
+}
+
+void MainWindow::on_textEdit_3_textChanged()
+{
+    nameGroup1=ui->textEdit_3->toPlainText();
+    QTableWidgetItem *header=new QTableWidgetItem();
+    header->setText(nameGroup1);
+
+    ui->table_input->setHorizontalHeaderItem(0,header);
+
+}
+
+void MainWindow::on_textEdit_4_textChanged()
+{
+    nameGroup1=ui->textEdit_3->toPlainText();
+    QTableWidgetItem *header=new QTableWidgetItem();
+    header->setText(nameGroup1);
+
+    ui->table_input->setHorizontalHeaderItem(0,header);
+
+    nameGroup2=ui->textEdit_4->toPlainText();
+    QTableWidgetItem *header2=new QTableWidgetItem();
+    header2->setText(nameGroup2);
+
+    ui->table_input->setHorizontalHeaderItem(1,header2);
+}
+
+void MainWindow::on_button_calc_clicked()
+{
+    vector <QStringList> data;
+    data=getDataFromTable(ui->table_input,howInput);
+    cout<<"DATA SIZE"<<data.size()<<" DATA SIZZZZ "<<data.at(0).at(0).toUtf8().constData()<< endl;
+    cout<<"STYDENTY "<<mann->getStudents()->size()<<endl;
+    mann->loadDataFromFields(data);
+    cout<<"STYDENTY "<<mann->getStudents()->size()<<endl;
+    mann->showStudents();
+    //mann->setRate();
+   // mann->results();
+    data.clear();
 }
