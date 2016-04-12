@@ -11,6 +11,9 @@
 #include "withney.h"
 #include <QMessageBox>
 #include <QDebug>
+#include <QGraphicsScene>
+#include <QGraphicsView>
+#include <QGraphicsItem>
 using namespace std;
 namespace Ui {
 class MainWindow;
@@ -24,6 +27,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     vector<QStringList> getInfoFromFields(QString str1,QString str2);//Функция возвращающая список строк с данными об оценках учеников
+    vector<QStringList> getInfoFromFields2(QString str1);//Функция возвращающая список строк с данными об оценках учеников
     vector<QStringList> getFromCsv(QString path);//функция считывает файл .csv
 
     void fillTable(QTableWidget *table,vector<QStringList> list );
@@ -31,6 +35,8 @@ public:
     QString takeString(QTableWidget *table);
 
     vector<QStringList> getDataFromTable(QTableWidget *table, int groupCount);
+
+    void outputTable(vector<Student> *students,QTableWidget *table);
 
 private slots:
 
@@ -88,6 +94,9 @@ private:
     void sortIndeces(QModelIndexList *m);
     QString nameGroup1="Контрольная";
     QString nameGroup2="Экспериментальная";
+
+    QGraphicsScene *scene;
+    QLine *line1;
 };
 
 #endif // MAINWINDOW_H

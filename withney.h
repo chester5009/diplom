@@ -39,7 +39,11 @@ public:
     void showTable(vector< vector<float> > *table); // показать таблицу критических значений
     void showTableCell(vector< vector<float> > *table,int,int); // показать ячейку таблицы критических значений
 
+    void setGroups();
 
+    int getSumScores(int group);
+
+    void setGroupStudent(int index,int group);
 
     void resetVariables();
     vector< vector<float> > *table001;

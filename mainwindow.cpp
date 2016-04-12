@@ -26,6 +26,25 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tableWidget->setRowCount(5);
     ui->tableWidget->setColumnCount(7);
     //ui->tableWidget->it
+    //РИСОВАНИЕ, ПАРАМЕРТЫ
+    ui->graphicsView->setBackgroundBrush(Qt::black);
+    scene=new QGraphicsScene(this);
+    ui->graphicsView->setScene(scene);
+    QBrush lineBrush(Qt::white);
+    QPen linePen(Qt::white);
+    linePen.setWidth(2);
+
+    scene->setSceneRect(0,0,ui->graphicsView->width(),ui->graphicsView->height());
+
+    QGraphicsEllipseItem *ellipse=new QGraphicsEllipseItem(scene->width()/2,scene->height()/2,50,50);
+    ellipse->setStartAngle(0);
+    ellipse->setSpanAngle(180);
+    ellipse->setPen(linePen);
+
+
+
+    scene->addLine(0,ui->graphicsView->height()/2,ui->graphicsView->width(),ui->graphicsView->height()/2,linePen);
+    scene->addItem(ellipse);
 
     mann->showStudents();
     mann->sortStudents();
@@ -96,12 +115,25 @@ vector<QStringList> MainWindow::getInfoFromFields(QString str1, QString str2){
 
      QStringList group1=str1.split("|");
      QStringList group2=str2.split("|");
+
      students.push_back(group1);
      students.push_back(group2);
      //group1.at(0).toUtf8().
      //cout<<students.at(0).at(2).toInt()+21<<endl;
 
      return students;
+}
+
+vector<QStringList> MainWindow::getInfoFromFields2(QString str1)
+{
+    vector<QStringList> students;
+    vector<float> studs;
+
+    QStringList group1=str1.split("|");
+    students.push_back(group1);
+
+    return students;
+
 }
 
 void MainWindow::on_calculateButton_clicked()
@@ -171,13 +203,41 @@ void MainWindow::on_calculateButton2_clicked()
 
     //cout<<"Orientation "<<getTableOrientation()<<endl;
     //cout<<"Hello"<<endl;
+    if(howInput==0){
+        ui->comboBox->setEnabled(false);
+    }
+    else{
+        ui->comboBox->setEnabled(true);
+    }
+    if(howInput==0){
+        if(stroka1!=NULL){
+         vector<QStringList> students=getInfoFromFields2(stroka1);
+         mann->loadDataFromFields(students);
+         mann->sortStudents();
+         mann->setGroups();
+         mann->setRate();
+         //mann->showStudents();
+         mann->results();
+         outputTable(mann->getStudents(),ui->table_output);
+         mann->resetVariables();
+         students.clear();
+         stroka1="";
+        }
+    }
+    else{
+
+    }
     if(stroka1!=NULL && stroka2!=NULL){
         vector<QStringList> students=getInfoFromFields(stroka1,stroka2);
         mann->loadDataFromFields(students);
         mann->sortStudents();
+
         mann->setRate();
         //mann->showStudents();
         mann->results();
+        outputTable(mann->getStudents(),ui->table_output);
+        mann->resetVariables();
+        students.clear();
         stroka1="";
         stroka2="";
     }
@@ -243,6 +303,7 @@ int MainWindow::getTableOrientation(){
             vector<QStringList> students=getInfoFromFields(str1,str2);
             mann->loadDataFromFields(students);
             mann->sortStudents();
+            if(howInput==0) mann->setGroups();
             mann->setRate();
             //mann->showStudents();
             mann->results();
@@ -296,18 +357,86 @@ vector<QStringList> MainWindow::getDataFromTable(QTableWidget *table, int groupC
         for (int j = 0; j < table->rowCount(); ++j) {
             if(table->item(j,i)!=0){
                stroka.push_back(table->item(j,i)->text()+"|");
+
                cout<<"STROKA!"<<endl;
             }
 
 
         }
+        stroka.remove(stroka.length()-1,1);
         list=stroka.split("|");
         newData.push_back(list);
         cout<<"Pushed!!"<<endl;
         cout<<stroka.toUtf8().constData()<<endl;
 
     }
+    cout<<"NewData size! "<<newData.at(0).size()<<endl;
     return newData;
+}
+
+
+
+void MainWindow::outputTable(vector<Student> *students, QTableWidget *table)
+{
+
+    table->clear();
+
+    table->setColumnCount(3);
+    table->setRowCount(students->size());
+    cout<<table->rowCount()<<" rows"<<endl;
+    QTableWidgetItem *header=new QTableWidgetItem();
+    QTableWidgetItem *header1=new QTableWidgetItem();
+    QTableWidgetItem *header2=new QTableWidgetItem();
+    QTableWidgetItem *header3=new QTableWidgetItem();
+    QTableWidgetItem *header4=new QTableWidgetItem();
+    header->setText("Группа");
+    table->setHorizontalHeaderItem(0,header);
+    header1->setText("Баллы");
+    table->setHorizontalHeaderItem(1,header1);
+    header2->setText("Ранг");
+    table->setHorizontalHeaderItem(2,header2);
+
+
+
+
+
+    table->resizeColumnsToContents();
+
+    for (int i = 0; i < students->size(); ++i) {
+        //QString str1=QString::number(students->at(i).group);
+        QTableWidgetItem *item1=new QTableWidgetItem; item1->setText(QString::number(students->at(i).group));
+        QTableWidgetItem *item2=new QTableWidgetItem; item2->setText(QString::number(students->at(i).scores));
+        QTableWidgetItem *item3=new QTableWidgetItem; item3->setText(QString::number(students->at(i).rate));
+        if(students->at(i).group==0){
+            QBrush *brush=new QBrush;
+
+            item1->setForeground(Qt::darkBlue);
+            item2->setTextColor(Qt::darkBlue);
+            item3->setTextColor(Qt::darkBlue);
+
+            item1->setBackgroundColor(Qt::green);
+            item2->setBackgroundColor(Qt::green);
+            item3->setBackgroundColor(Qt::green);
+        }
+        else{
+            item1->setTextColor(Qt::cyan);
+            item2->setTextColor(Qt::cyan);
+            item3->setTextColor(Qt::cyan);
+
+            item1->setBackgroundColor(Qt::red);
+            item2->setBackgroundColor(Qt::red);
+            item3->setBackgroundColor(Qt::red);
+        }
+
+
+        table->setItem(i,0,item1);
+        table->setItem(i,1,item2);
+        table->setItem(i,2,item3);
+
+    }
+
+    ui->stackedWidget->setCurrentIndex(2);
+
 }
 
 
@@ -441,10 +570,18 @@ void MainWindow::on_button_calc_clicked()
     data=getDataFromTable(ui->table_input,howInput);
     cout<<"DATA SIZE"<<data.size()<<" DATA SIZZZZ "<<data.at(0).at(0).toUtf8().constData()<< endl;
     cout<<"STYDENTY "<<mann->getStudents()->size()<<endl;
+    mann->clearStudents();
     mann->loadDataFromFields(data);
     cout<<"STYDENTY "<<mann->getStudents()->size()<<endl;
+    mann->sortStudents();
+    if(howInput==0) mann->setGroups();
     mann->showStudents();
-    //mann->setRate();
-   // mann->results();
+    mann->setRate();
+    mann->showStudents();
+    cout<<"Summs "<<mann->getSumScores(0)<<" "<<mann->getSumScores(1)<<endl;
+    mann->results();
+
+    outputTable(mann->getStudents(),ui->table_output);
+    mann->resetVariables();
     data.clear();
 }

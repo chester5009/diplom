@@ -189,7 +189,7 @@ void Withney::results(){
     painter.drawText(30,30,results);
 
 
-    resetVariables();
+    //resetVariables();
 }
 
 void Withney::setTable(vector<QStringList> data, int index){
@@ -233,6 +233,31 @@ void Withney::showTable(vector<vector<float> > *table){
 void Withney::showTableCell(vector<vector<float> > *table, int row, int col){
        cout<<table->at(row-3).at(col-2)<<" ";
        cout<<endl;
+}
+
+void Withney::setGroups()
+{
+    int size=getStudents()->size();
+    for (int i = 0; i < size; ++i) {
+        if(i*2<size) setGroupStudent(i,1);
+        else setGroupStudent(i,0);
+    }
+}
+
+int Withney::getSumScores(int group)
+{
+    int sumScores=0;
+    for (int i = 0; i < getStudents()->size(); ++i) {
+        if(getStudents()->at(i).group==group){
+            sumScores+=getStudents()->at(i).scores;
+        }
+    }
+    return sumScores;
+}
+
+void Withney::setGroupStudent(int index,int group)
+{
+    getStudents()->at(index).group=group;
 }
 
 void Withney::resetVariables(){
