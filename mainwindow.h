@@ -83,6 +83,8 @@ private slots:
 
     void on_button_calc_clicked();
 
+    void on_button_Mann_clicked();
+
 private:
     Ui::MainWindow *ui;
     Withney *mann=new Withney;

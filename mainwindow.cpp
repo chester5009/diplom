@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    method=ui->comboSelectMethod->currentIndex();
+    method=0;
     howInput=ui->comboBox_list->currentIndex();
 
     this->setMaximumSize(648,613);
@@ -25,6 +25,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->stackedWidget->setCurrentIndex(0);
     ui->tableWidget->setRowCount(5);
     ui->tableWidget->setColumnCount(7);
+
+    ui->button_Mann->adjustSize();
+    ui->button_Pirson->adjustSize();
+    ui->button_K_S->adjustSize();
     //ui->tableWidget->it
     //РИСОВАНИЕ, ПАРАМЕРТЫ
     ui->graphicsView->setBackgroundBrush(Qt::black);
@@ -149,6 +153,13 @@ void MainWindow::on_calculateButton_clicked()
 
 void MainWindow::on_action_csv_triggered()
 {
+    QMessageBox *info=new QMessageBox;
+    QString infoString="Проверьте,чтобы файл имел расширение .csv \n";
+    infoString.push_back("ИНСТРУКЦИЯ:\n");
+    infoString.push_back("При сохранении файла в excel нажмите сохранить как. Далее выберите формат .csv , ок.");
+
+    info->setText(infoString);
+    info->exec();
     ui->stackedWidget->setCurrentIndex(1);
     QFileDialog openFile;
     QString path=openFile.getOpenFileName();
@@ -419,13 +430,13 @@ void MainWindow::outputTable(vector<Student> *students, QTableWidget *table)
             item3->setBackgroundColor(Qt::green);
         }
         else{
-            item1->setTextColor(Qt::cyan);
-            item2->setTextColor(Qt::cyan);
-            item3->setTextColor(Qt::cyan);
+            item1->setTextColor(QColor(3,255,255));
+            item2->setTextColor(QColor(3,255,255));
+            item3->setTextColor(QColor(3,255,255));
 
-            item1->setBackgroundColor(Qt::red);
-            item2->setBackgroundColor(Qt::red);
-            item3->setBackgroundColor(Qt::red);
+            item1->setBackgroundColor(QColor(220,147,32));
+            item2->setBackgroundColor(QColor(220,147,32));
+            item3->setBackgroundColor(QColor(220,147,32));
         }
 
 
@@ -443,7 +454,7 @@ void MainWindow::outputTable(vector<Student> *students, QTableWidget *table)
 
 void MainWindow::on_buttonBox_accepted()
 {
-    method=ui->comboSelectMethod->currentIndex();
+    /*method=ui->comboSelectMethod->currentIndex();
     cout<<method<<endl;
     howInput=ui->comboBox_list->currentIndex();
     QMessageBox msg;
@@ -453,7 +464,7 @@ void MainWindow::on_buttonBox_accepted()
 
    ui->table_input->setColumnCount(howInput+1);
    ui->table_input->clearContents();
-   //ui->stackedWidget->setCurrentIndex(1);
+   //ui->stackedWidget->setCurrentIndex(1);*/
 }
 
 void MainWindow::on_action_help_triggered()
@@ -584,4 +595,16 @@ void MainWindow::on_button_calc_clicked()
     outputTable(mann->getStudents(),ui->table_output);
     mann->resetVariables();
     data.clear();
+}
+
+void MainWindow::on_button_Mann_clicked()
+{
+    method=0;
+    cout<<method<<endl;
+    howInput=ui->comboBox_list->currentIndex();
+
+    ui->actions->setEnabled(true);
+
+    ui->table_input->setColumnCount(howInput+1);
+    ui->table_input->clearContents();
 }
