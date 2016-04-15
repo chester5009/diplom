@@ -15,7 +15,6 @@ struct Object{
     double Fei_minus_Ft;
     double Fei_minus_Ft_square;
     double square_div_Ft;
-    double pirs_emp;
 };
 
 class Pirson
@@ -25,9 +24,11 @@ private:
     double n;
     double k;
     double v;
+    double pirs_emp;
 public:
     Pirson();
     void setData(QTableWidget *table);
+    void showData();
 
 };
 

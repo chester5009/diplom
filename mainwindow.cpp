@@ -657,5 +657,8 @@ void MainWindow::on_button_pirson_calc_clicked()
     info.setText("Неправильно заполненные строки будут удалены!");
     info.exec();
     tableCorrector(ui->table_pirson);
+    cout<<ui->table_pirson->rowCount()<<endl;
+
     pirson->setData(ui->table_pirson);
+    pirson->showData();
 }
