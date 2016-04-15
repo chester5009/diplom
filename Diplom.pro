@@ -15,10 +15,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    withney.cpp
+    withney.cpp \
+    pirson.cpp
 
 HEADERS  += mainwindow.h \
     withney.h \
-    tables.h
+    tables.h \
+    pirson.h
 
 FORMS    += mainwindow.ui

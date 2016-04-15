@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>5</number>
     </property>
     <widget class="QWidget" name="page_3">
      <widget class="QSpinBox" name="spinBoxMaxScores">
@@ -433,6 +433,70 @@
       </property>
       <property name="text">
        <string>Добавить</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="page_6">
+     <widget class="QTableWidget" name="table_pirson">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>60</y>
+        <width>241</width>
+        <height>371</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>10</y>
+        <width>131</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Метод Пирсона</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="button_pirson_addrow">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>470</y>
+        <width>111</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Добавить строку</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="button_pirson_deleterow">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>470</y>
+        <width>111</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Удалить строку</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="button_pirson_calc">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>470</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Рассчёт</string>
       </property>
      </widget>
     </widget>

@@ -148,8 +148,8 @@ void Withney::results(){
     cout<<"Premennye "<<n1<<" "<<n2<<" "<<nx<<" "<<Tx<<" "<<sum1<<" "<<sum2<<endl;
     float res=calculateWithney(n1,n2,nx,Tx);
 
-    float Uemp001=t1[n1-3][n2-2];   //this->table001->at(n1-3).at(n2-2);
-    float Uemp005=t2[n1-3][n2-2];   //this->table005->at(n1-3).at(n2-2);
+    float Uemp001=mann_t1[n1-3][n2-2];   //this->table001->at(n1-3).at(n2-2);
+    float Uemp005=mann_t2[n1-3][n2-2];   //this->table005->at(n1-3).at(n2-2);
     cout<<"UEmp001= "<<Uemp001<<" UEmp005= "<<Uemp005<<endl;
 
     string itog1="Group 2  DOES NOT exceed Group 1 the level of nonverbal intelligence";

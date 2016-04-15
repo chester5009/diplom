@@ -9,6 +9,7 @@
 #include <QTextStream>
 #include <QTableWidget>
 #include "withney.h"
+#include "pirson.h"
 #include <QMessageBox>
 #include <QDebug>
 #include <QGraphicsScene>
@@ -85,15 +86,25 @@ private slots:
 
     void on_button_Mann_clicked();
 
+    void on_button_Pirson_clicked();
+
+    void on_button_pirson_addrow_clicked();
+
+    void on_button_pirson_deleterow_clicked();
+
+    void on_button_pirson_calc_clicked();
+
 private:
     Ui::MainWindow *ui;
     Withney *mann=new Withney;
+    Pirson *pirson=new Pirson;
     QString stroka1=NULL;
     QString stroka2=NULL;
     int method; //0-mann 1-kolmogorov
     int howInput;//0-общий список ,1- по 2 группы
     void deleteIndeces(QModelIndexList *m);
     void sortIndeces(QModelIndexList *m);
+    void tableCorrector(QTableWidget *table);
     QString nameGroup1="Контрольная";
     QString nameGroup2="Экспериментальная";
 

@@ -523,6 +523,18 @@ void MainWindow::sortIndeces(QModelIndexList *m)
     }
 }
 
+void MainWindow::tableCorrector(QTableWidget *table)
+{
+    for (int i = 0; i < table->rowCount(); ++i) {
+        for (int j = 0; j < table->columnCount(); ++j) {
+            if(table->item(i,j)->text().isEmpty()){
+                table->removeRow(i);
+                break;
+            }
+        }
+    }
+}
+
 void MainWindow::on_buttonBox_2_accepted()
 {
     ui->stackedWidget->setCurrentIndex(2);
@@ -607,4 +619,43 @@ void MainWindow::on_button_Mann_clicked()
 
     ui->table_input->setColumnCount(howInput+1);
     ui->table_input->clearContents();
+}
+
+void MainWindow::on_button_Pirson_clicked()
+{
+    ui->table_pirson->clear();
+    ui->table_pirson->clearContents();
+    cout<<"cleared"<<endl;
+
+    ui->table_pirson->setColumnCount(2);
+    ui->table_pirson->setRowCount(1);
+
+    QTableWidgetItem *header1=new QTableWidgetItem;
+    QTableWidgetItem *header2=new QTableWidgetItem;
+    header1->setText("Название");
+    ui->table_pirson->setHorizontalHeaderItem(0,header1);
+    header2->setText("F эi");
+    ui->table_pirson->setHorizontalHeaderItem(1,header2);
+
+    //ui->table_pirson->adjustSize();
+    ui->stackedWidget->setCurrentIndex(5);
+}
+
+void MainWindow::on_button_pirson_addrow_clicked()
+{
+    ui->table_pirson->insertRow(ui->table_pirson->rowCount());
+}
+
+void MainWindow::on_button_pirson_deleterow_clicked()
+{
+    ui->table_pirson->removeRow(ui->table_pirson->rowCount()-1);
+}
+
+void MainWindow::on_button_pirson_calc_clicked()
+{
+    QMessageBox info;
+    info.setText("Неправильно заполненные строки будут удалены!");
+    info.exec();
+    tableCorrector(ui->table_pirson);
+    pirson->setData(ui->table_pirson);
 }
