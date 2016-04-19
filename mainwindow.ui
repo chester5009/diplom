@@ -26,7 +26,7 @@
     <property name="currentIndex">
      <number>5</number>
     </property>
-    <widget class="QWidget" name="page_3">
+    <widget class="QWidget" name="startPage">
      <widget class="QSpinBox" name="spinBoxMaxScores">
       <property name="geometry">
        <rect>
@@ -128,18 +128,18 @@
        <string>Метод Колмогорова-Смирнова</string>
       </property>
      </widget>
-     <widget class="QTextEdit" name="textEdit_5">
+     <widget class="QTextEdit" name="textInfo">
       <property name="geometry">
        <rect>
         <x>40</x>
         <y>160</y>
         <width>291</width>
-        <height>101</height>
+        <height>151</height>
        </rect>
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="page_4">
+    <widget class="QWidget" name="mannPage">
      <widget class="QTableWidget" name="table_input">
       <property name="geometry">
        <rect>
@@ -370,7 +370,7 @@
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="page_2">
+    <widget class="QWidget" name="mannPage2">
      <widget class="QTableWidget" name="tableWidget">
       <property name="geometry">
        <rect>
@@ -436,7 +436,7 @@
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="page_6">
+    <widget class="QWidget" name="pirson_kolmPage">
      <widget class="QTableWidget" name="table_pirson">
       <property name="geometry">
        <rect>
@@ -447,7 +447,7 @@
        </rect>
       </property>
      </widget>
-     <widget class="QLabel" name="label_3">
+     <widget class="QLabel" name="labelNamePirson">
       <property name="geometry">
        <rect>
         <x>220</x>
@@ -497,6 +497,29 @@
       </property>
       <property name="text">
        <string>Рассчёт</string>
+      </property>
+     </widget>
+     <widget class="QGraphicsView" name="graphicsView_2">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>60</y>
+        <width>291</width>
+        <height>221</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelPirsonResults">
+      <property name="geometry">
+       <rect>
+        <x>280</x>
+        <y>310</y>
+        <width>281</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>TextLabel</string>
       </property>
      </widget>
     </widget>

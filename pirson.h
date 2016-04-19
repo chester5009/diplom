@@ -6,6 +6,7 @@
 #include <string.h>
 #include <QTableWidget>
 #include <math.h>
+
 using namespace std;
 
 struct Object{
@@ -20,6 +21,9 @@ struct Object{
 class Pirson
 {
 private:
+    float *pirson_t1;
+    float *pirson_t2;
+    void initTables();
     vector<Object> data;
     double n;
     double k;

@@ -10,11 +10,13 @@
 #include <QTableWidget>
 #include "withney.h"
 #include "pirson.h"
+#include "kolm_smirnov.h"
 #include <QMessageBox>
 #include <QDebug>
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QGraphicsItem>
+
 using namespace std;
 namespace Ui {
 class MainWindow;
@@ -94,13 +96,16 @@ private slots:
 
     void on_button_pirson_calc_clicked();
 
+    void on_button_K_S_clicked();
+
 private:
     Ui::MainWindow *ui;
     Withney *mann=new Withney;
     Pirson *pirson=new Pirson;
+    Kolm_smirnov *smirnov=new Kolm_smirnov;
     QString stroka1=NULL;
     QString stroka2=NULL;
-    int method; //0-mann 1-kolmogorov
+    int method; //0-mann 1- pirson 2-kolmogorov
     int howInput;//0-общий список ,1- по 2 группы
     void deleteIndeces(QModelIndexList *m);
     void sortIndeces(QModelIndexList *m);

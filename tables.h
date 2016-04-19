@@ -5,6 +5,7 @@
 
 #include <QString>
 #include <QStringList>
+#include <vector>
 
 vector <QStringList> table1;
 float mann_t1[20][20]={
@@ -233,4 +234,6 @@ float pirson_t2[80]={6.635,
 void fillTable(){
 
 }
+
+
 

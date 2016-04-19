@@ -465,6 +465,9 @@ void MainWindow::on_buttonBox_accepted()
    ui->table_input->setColumnCount(howInput+1);
    ui->table_input->clearContents();
    //ui->stackedWidget->setCurrentIndex(1);*/
+    if(method==1 || method ==2) ui->stackedWidget->setCurrentIndex(5);
+    if(method==2) smirnov->setWidget(ui->table_pirson,ui->labelNamePirson);
+
 }
 
 void MainWindow::on_action_help_triggered()
@@ -525,14 +528,25 @@ void MainWindow::sortIndeces(QModelIndexList *m)
 
 void MainWindow::tableCorrector(QTableWidget *table)
 {
-    for (int i = 0; i < table->rowCount(); ++i) {
-        for (int j = 0; j < table->columnCount(); ++j) {
-            if(table->item(i,j)->text().isEmpty()){
-                table->removeRow(i);
-                break;
+    if(table->columnCount()>1){
+        for (int i = 0; i < table->rowCount(); ++i) {
+            for (int j = 0; j < table->columnCount(); ++j) {
+                if(table->item(i,j)->text().isEmpty()){
+                    table->removeRow(i);
+                    break;
+                }
             }
         }
     }
+    else{
+        for (int i = 0; i < table->rowCount(); ++i) {
+                if(table->item(i,0)->text().isEmpty()){
+                    table->removeRow(i);
+                    break;
+                }
+        }
+    }
+
 }
 
 void MainWindow::on_buttonBox_2_accepted()
@@ -611,6 +625,9 @@ void MainWindow::on_button_calc_clicked()
 
 void MainWindow::on_button_Mann_clicked()
 {
+    QString mannInfo="Критерий предназначен для оценки различий между  двумя  выборками по  уровню"
+            "какого-либо признака, количественно измеренного. Он позволяет выявлять различия"
+            "между  малыми  выборками, когда  n 1 •n 2 ≥ 3 или  n 1 =2, n 2 ≥5.";
     method=0;
     cout<<method<<endl;
     howInput=ui->comboBox_list->currentIndex();
@@ -619,10 +636,19 @@ void MainWindow::on_button_Mann_clicked()
 
     ui->table_input->setColumnCount(howInput+1);
     ui->table_input->clearContents();
+    ui->textInfo->setText(mannInfo);
 }
 
 void MainWindow::on_button_Pirson_clicked()
 {
+    QString pirsonInfo="Критерий χ 2 применяется в двух целях;"
+            "1) для сопоставления эмпирического распределения признака с теоретическим -"
+            "равномерным, нормальным или каким-то иным;"
+            "2) для сопоставления двух, трех или более эмпирических распределений одного и"
+            "того же признака. ";
+    method=1;
+    ui->textInfo->setText(pirsonInfo);
+    ui->actions->setEnabled(true);
     ui->table_pirson->clear();
     ui->table_pirson->clearContents();
     cout<<"cleared"<<endl;
@@ -638,7 +664,7 @@ void MainWindow::on_button_Pirson_clicked()
     ui->table_pirson->setHorizontalHeaderItem(1,header2);
 
     //ui->table_pirson->adjustSize();
-    ui->stackedWidget->setCurrentIndex(5);
+    //ui->stackedWidget->setCurrentIndex(5);
 }
 
 void MainWindow::on_button_pirson_addrow_clicked()
@@ -658,7 +684,26 @@ void MainWindow::on_button_pirson_calc_clicked()
     info.exec();
     tableCorrector(ui->table_pirson);
     cout<<ui->table_pirson->rowCount()<<endl;
+    if(method==1){
+        pirson->setData(ui->table_pirson);
+        pirson->showData();
+    }
+    else if(method==2){
 
-    pirson->setData(ui->table_pirson);
-    pirson->showData();
+    }
+
+}
+
+void MainWindow::on_button_K_S_clicked()
+{
+    QString kolmsInfo="Критерий X предназначен для сопоставления двух распределений:"
+    "а) эмпирического с теоретическим, например, равномерным или"
+    "нормальным;"
+    "б)  одного  эмпирического  распределения  с  другими  эмпирическим"
+    "распределением."
+    "Критерий позволяет найти точку, в которой сумма накопленных расхождений между"
+    "двумя  распределениями  является  наибольшей,  и оценить  достоверность  этого"
+    "расхождения";
+    ui->textInfo->setText(kolmsInfo);
+    method=2;
 }
