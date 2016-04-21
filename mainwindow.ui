@@ -89,54 +89,48 @@
        </property>
       </item>
      </widget>
-     <widget class="QPushButton" name="button_Mann">
-      <property name="geometry">
-       <rect>
-        <x>60</x>
-        <y>60</y>
-        <width>111</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Метод Манна-Уитни</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="button_Pirson">
-      <property name="geometry">
-       <rect>
-        <x>200</x>
-        <y>60</y>
-        <width>111</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Метод Пирсона</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="button_K_S">
-      <property name="geometry">
-       <rect>
-        <x>360</x>
-        <y>60</y>
-        <width>111</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Метод Колмогорова-Смирнова</string>
-      </property>
-     </widget>
      <widget class="QTextEdit" name="textInfo">
       <property name="geometry">
        <rect>
         <x>40</x>
-        <y>160</y>
+        <y>260</y>
         <width>291</width>
         <height>151</height>
        </rect>
       </property>
+     </widget>
+     <widget class="QWidget" name="verticalLayoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>10</y>
+        <width>551</width>
+        <height>179</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QPushButton" name="button_Mann">
+         <property name="text">
+          <string>Метод Манна-Уитни</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="button_Pirson">
+         <property name="text">
+          <string>Метод Пирсона</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="button_K_S">
+         <property name="text">
+          <string>Метод Колмогорова-Смирнова</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </widget>
     <widget class="QWidget" name="mannPage">
@@ -148,32 +142,6 @@
         <width>391</width>
         <height>391</height>
        </rect>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>420</y>
-        <width>111</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Добавить строку</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_2">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>450</y>
-        <width>151</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Удалить выделенные</string>
       </property>
      </widget>
      <widget class="QDialogButtonBox" name="buttonBox_2">
@@ -192,8 +160,8 @@
      <widget class="QPushButton" name="buttonChangeName">
       <property name="geometry">
        <rect>
-        <x>240</x>
-        <y>430</y>
+        <x>320</x>
+        <y>420</y>
         <width>191</width>
         <height>23</height>
        </rect>
@@ -205,8 +173,8 @@
      <widget class="QTextEdit" name="textEdit_3">
       <property name="geometry">
        <rect>
-        <x>230</x>
-        <y>470</y>
+        <x>310</x>
+        <y>460</y>
         <width>131</width>
         <height>31</height>
        </rect>
@@ -215,8 +183,8 @@
      <widget class="QTextEdit" name="textEdit_4">
       <property name="geometry">
        <rect>
-        <x>380</x>
-        <y>470</y>
+        <x>460</x>
+        <y>460</y>
         <width>131</width>
         <height>31</height>
        </rect>
@@ -234,6 +202,32 @@
       <property name="text">
        <string>РАССЧЁТ</string>
       </property>
+     </widget>
+     <widget class="QWidget" name="gridLayoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>426</y>
+        <width>257</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="1" column="0">
+        <widget class="QPushButton" name="pushButton_2">
+         <property name="text">
+          <string>Удалить выделенные</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QPushButton" name="pushButton">
+         <property name="text">
+          <string>Добавить строку</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </widget>
     <widget class="QWidget" name="page_5">
@@ -377,63 +371,57 @@
         <x>40</x>
         <y>30</y>
         <width>541</width>
-        <height>481</height>
+        <height>421</height>
        </rect>
       </property>
      </widget>
-     <widget class="QPushButton" name="calculateButton2">
+     <widget class="QWidget" name="horizontalLayoutWidget">
       <property name="geometry">
        <rect>
-        <x>70</x>
-        <y>510</y>
-        <width>75</width>
-        <height>23</height>
+        <x>90</x>
+        <y>450</y>
+        <width>461</width>
+        <height>80</height>
        </rect>
       </property>
-      <property name="text">
-       <string>Рассчитать</string>
-      </property>
-     </widget>
-     <widget class="QComboBox" name="comboBox">
-      <property name="geometry">
-       <rect>
-        <x>210</x>
-        <y>510</y>
-        <width>181</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Ravie</family>
-        <weight>75</weight>
-        <italic>true</italic>
-        <bold>true</bold>
-       </font>
-      </property>
-      <item>
-       <property name="text">
-        <string>Контрольная группа</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Экспериментальная группа</string>
-       </property>
-      </item>
-     </widget>
-     <widget class="QPushButton" name="addButton">
-      <property name="geometry">
-       <rect>
-        <x>500</x>
-        <y>510</y>
-        <width>75</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Добавить</string>
-      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QPushButton" name="calculateButton2">
+         <property name="text">
+          <string>Рассчитать</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBox">
+         <property name="font">
+          <font>
+           <family>Ravie</family>
+           <weight>75</weight>
+           <italic>true</italic>
+           <bold>true</bold>
+          </font>
+         </property>
+         <item>
+          <property name="text">
+           <string>Контрольная группа</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Экспериментальная группа</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="addButton">
+         <property name="text">
+          <string>Добавить</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </widget>
     <widget class="QWidget" name="pirson_kolmPage">
@@ -460,45 +448,6 @@
        <string>Метод Пирсона</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="button_pirson_addrow">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>470</y>
-        <width>111</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Добавить строку</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="button_pirson_deleterow">
-      <property name="geometry">
-       <rect>
-        <x>150</x>
-        <y>470</y>
-        <width>111</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Удалить строку</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="button_pirson_calc">
-      <property name="geometry">
-       <rect>
-        <x>290</x>
-        <y>470</y>
-        <width>75</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Рассчёт</string>
-      </property>
-     </widget>
      <widget class="QGraphicsView" name="graphicsView_2">
       <property name="geometry">
        <rect>
@@ -522,6 +471,39 @@
        <string>TextLabel</string>
       </property>
      </widget>
+     <widget class="QWidget" name="horizontalLayoutWidget_2">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>440</y>
+        <width>366</width>
+        <height>80</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QPushButton" name="button_pirson_addrow">
+         <property name="text">
+          <string>Добавить строку</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="button_pirson_deleterow">
+         <property name="text">
+          <string>Удалить строку</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="button_pirson_calc">
+         <property name="text">
+          <string>Рассчёт</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </widget>
   </widget>
@@ -531,7 +513,7 @@
      <x>0</x>
      <y>0</y>
      <width>648</width>
-     <height>21</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="actions">

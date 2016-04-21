@@ -7,12 +7,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
+    //this->setMenuBar(ui->menuBar);
     method=0;
     howInput=ui->comboBox_list->currentIndex();
+    checkOS();
 
-    this->setMaximumSize(648,613);
-    this->setMinimumSize(648,613);
 
     ui->actions->setEnabled(false);
 
@@ -706,4 +705,33 @@ void MainWindow::on_button_K_S_clicked()
     "расхождения";
     ui->textInfo->setText(kolmsInfo);
     method=2;
+}
+
+void MainWindow::checkOS()
+{
+    cout<<"CHECKIINK os ..."<<endl;
+    char *os=getenv("OSTYPE");
+
+    cout<<os<<endl;
+    if(os==NULL){
+        os=getenv("windir");
+        if(os != NULL) {
+            cout<<"its Windows"<<endl;
+            this->setMaximumSize(648,613);
+            this->setMinimumSize(648,613);
+        }
+    }
+    else{
+        // переменная окружения есть, попробуем вызнать что же это такое.
+           if(strcmp(os, "linux") == 0)
+              printf("linux");
+           else if(strcmp(os, "hpux") == 0)
+              printf("hpux");
+           else if(strcmp(os, "solaris") == 0)
+              printf("solaris");
+           else if(strcmp(os, "darwin") == 0)
+              printf("darwin");
+    }
+    //this->setMaximumSize(648,613);
+    //this->setMinimumSize(648,613);
 }

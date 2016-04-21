@@ -29,6 +29,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
     vector<QStringList> getInfoFromFields(QString str1,QString str2);//Функция возвращающая список строк с данными об оценках учеников
     vector<QStringList> getInfoFromFields2(QString str1);//Функция возвращающая список строк с данными об оценках учеников
     vector<QStringList> getFromCsv(QString path);//функция считывает файл .csv
@@ -107,6 +108,7 @@ private:
     QString stroka2=NULL;
     int method; //0-mann 1- pirson 2-kolmogorov
     int howInput;//0-общий список ,1- по 2 группы
+    void checkOS();
     void deleteIndeces(QModelIndexList *m);
     void sortIndeces(QModelIndexList *m);
     void tableCorrector(QTableWidget *table);
