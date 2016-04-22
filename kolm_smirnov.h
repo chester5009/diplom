@@ -31,6 +31,8 @@ public:
     vector <Obj> getObjs() const;
     void setWidget(QTableWidget *table, QLabel *label);
     void setData(QTableWidget *table);
+    void calculate(QTableWidget *table);
+    void fillTable(QTableWidget *table);
 };
 
 #endif // KOLM_SMIRNOV_H

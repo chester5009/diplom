@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //this->setMenuBar(ui->menuBar);
     method=0;
     howInput=ui->comboBox_list->currentIndex();
-    checkOS();
+    //checkOS();
 
 
     ui->actions->setEnabled(false);
@@ -683,12 +683,15 @@ void MainWindow::on_button_pirson_calc_clicked()
     info.exec();
     tableCorrector(ui->table_pirson);
     cout<<ui->table_pirson->rowCount()<<endl;
+    cout<<method<<endl;
     if(method==1){
         pirson->setData(ui->table_pirson);
         pirson->showData();
     }
     else if(method==2){
-
+        smirnov->setData(ui->table_pirson);
+        smirnov->calculate(ui->table_pirson);
+        smirnov->fillTable(ui->table_pirson);
     }
 
 }
@@ -713,7 +716,7 @@ void MainWindow::checkOS()
     char *os=getenv("OSTYPE");
 
     cout<<os<<endl;
-    if(os==NULL){
+    /*if(os==NULL){
         os=getenv("windir");
         if(os != NULL) {
             cout<<"its Windows"<<endl;
@@ -731,7 +734,7 @@ void MainWindow::checkOS()
               printf("solaris");
            else if(strcmp(os, "darwin") == 0)
               printf("darwin");
-    }
+    }*/
     //this->setMaximumSize(648,613);
     //this->setMinimumSize(648,613);
 }
