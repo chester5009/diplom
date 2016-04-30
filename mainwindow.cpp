@@ -27,7 +27,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->button_Mann->adjustSize();
     ui->button_Pirson->adjustSize();
+
     ui->button_K_S->adjustSize();
+    ui->buttonBox->adjustSize();
+    ui->buttonBox_2->adjustSize();
+    ui->addButton->adjustSize();
+    ui->buttonChangeName->adjustSize();
+    ui->button_calc->adjustSize();
+    ui->button_Mann->adjustSize();
     //ui->tableWidget->it
     //РИСОВАНИЕ, ПАРАМЕРТЫ
     ui->graphicsView->setBackgroundBrush(Qt::black);
